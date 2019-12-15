@@ -64,16 +64,27 @@
          }
            //轮播下一张的函数
            function next(){
-               index++;
-               navChange();
-               animate(slider,{left:-1200*index},function(){
+               if(isMoving){
+                   return;
+               }
+                isMoving=true;
+                index++;
+                navChange();
+                animate(slider,{left:-1200*index},function(){
                    if(index === 6){
                        slider.style.left="-1200px";
                        index=1;
                    }
+                   isMoving=false;
                });
-           }
+
+               }
+              
            function prev(){
+            if(isMoving){
+                   return;
+               }
+               isMoving=true;
                index--;
                navChange();
                animate(slider,{left:-1200*index},function(){
@@ -81,6 +92,7 @@
                        slider.style.left="-6000px";
                        index=5;
                    }
+                   isMoving=false;
                });
            }
 
